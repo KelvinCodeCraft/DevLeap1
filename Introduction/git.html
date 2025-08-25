@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git & GitHub Presentation</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #24292e;
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #0366d6;
+      margin-top: 30px;
+      border-left: 5px solid #0366d6;
+      padding-left: 10px;
+    }
+
+    p {
+      font-size: 1.1em;
+    }
+
+    ul {
+      margin-left: 20px;
+      padding-left: 15px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 1.05em;
+    }
+
+    code {
+      background: #f1f1f1;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      color: #e83e8c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: #24292e;
+      color: #fff;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .highlight {
+      background: #eaf5ff;
+      border-left: 4px solid #0366d6;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Git & GitHub Presentation</h1>
+    <p>Version Control & Collaboration Made Simple</p>
+  </header>
+
+  <main>
+    <h2>Introduction</h2>
+    <p>
+      Git is like a time machine for your code. You can save your work, go back to older versions, and see who made what changes.
+    </p>
+    <p>
+      GitHub is the cloud home for your Git projects — where you store, share, and work together with others.
+    </p>
+
+    <h2>Why Use Git & GitHub?</h2>
+    <ul>
+      <li>Track changes — never lose progress.</li>
+      <li>Work with teammates easily.</li>
+      <li>Keep a backup in the cloud.</li>
+      <li>Contribute to open-source projects.</li>
+    </ul>
+
+    <h2>Key Git Concepts</h2>
+    <ul>
+        <li><strong>Repository:</strong> A directory that contains all the files and their history.</li>
+        <li><strong>Commit:</strong> A snapshot of the project at a specific point in time.</li>
+        <li><strong>Branch:</strong> A separate line of development in a repository.</li>
+        <li><strong>Merge:</strong> Combining changes from different branches.</li>
+        <li><strong>Remote:</strong> A version of the repository hosted on a server.</li>
+        <li><strong>Clone:</strong> Creating a local copy of a remote repository.</li>
+        <li><strong>Push:</strong> Sending local changes to a remote repository.</li>
+        <li><strong>Pull:</strong> Fetching changes from a remote repository and merging them into the local repository.</li>
+        <li><strong>Staging Area:</strong> A place where changes are prepared before committing.</li>
+        <li><strong>HEAD:</strong> A reference to the current commit in the repository.</li>
+        <li><strong>Conflict:</strong> Occurs when changes in different branches cannot be automatically merged.</li>
+        <li><strong>Tag:</strong> A marker for a specific commit, often used for releases.</li>
+        <li><strong>Fork:</strong> A personal copy of someone else's repository, allowing for independent development.</li>
+        <li><strong>Pull Request:</strong> A request to merge changes from one branch into another, often used in collaborative projects.</li>
+        <li><strong>Cherry-pick:</strong> Applying a specific commit from one branch to another.</li>
+        <li><strong>Rebase:</strong> Reapplying commits from one branch onto another, often used to maintain a clean project history.</li>
+        <li><strong>Stash:</strong> Temporarily saving changes that are not ready to be committed.</li>
+        <li><strong>Blame:</strong> Showing who made changes to each line of a file.</li>
+        <li><strong>Revert:</strong> Creating a new commit that undoes changes made by a previous commit.</li>
+        <li><strong>Submodule:</strong> A repository nested inside another repository, allowing for modular development.</li>
+        <li><strong>Worktree:</strong> A separate working directory for a specific branch, allowing multiple branches to be worked on simultaneously.</li>
+        <li><strong>Squash:</strong> Combining multiple commits into a single commit, often used to simplify commit history.</li>
+        <li><strong>Bisect:</strong> A method for finding the commit that introduced a bug by performing a binary search through the commit history.</li>
+        <li><strong>Hooks:</strong> Scripts that run at specific points in the Git workflow, allowing for automation of tasks like testing or deployment.</li>
+        <li><strong>Config:</strong> Settings that control Git's behavior, such as user information and repository settings.</li>
+        <li><strong>Alias:</strong> A shortcut for a longer Git command, allowing for easier usage.</li>
+        <li><strong>Diff:</strong> A comparison of changes between commits, branches, or files, showing what has been added or removed.</li>
+    </ul>
+
+    <h2>Basic Git Commands</h2>
+    <div class="highlight">
+      <ul>
+        <li><code>git init</code>: Initialize a new Git repository.</li>
+        <li><code>git clone [url]</code>: Clone a remote repository.</li>
+        <li><code>git add [file]</code>: Stage changes for commit.</li>
+        <li><code>git commit -m "message"</code>: Commit staged changes with a message.</li>
+        <li><code>git status</code>: Check the status of the repository.</li>
+        <li><code>git push</code>: Push changes to the remote repository.</li>
+        <li><code>git pull</code>: Fetch and merge changes from the remote repository.</li>
+        <li><code>git branch</code>: List branches in the repository.</li>
+        <li><code>git checkout [branch]</code>: Switch to a different branch.</li>
+        <li><code>git merge [branch]</code>: Merge changes from another branch into the current branch.</li>
+        <li><code>git log</code>: View the commit history.</li>
+        <li><code>git diff</code>: Show changes between commits, branches, or files.</li>
+        <li><code>git reset [commit]</code>: Reset the repository to a specific commit.</li>
+        <li><code>git revert [commit]</code>: Create a new commit that undoes changes made by a previous commit.</li>
+        <li><code>git stash</code>: Temporarily save changes that are not ready to be committed.</li>
+        <li><code>git tag [name]</code>: Create a tag for a specific commit.</li>
+        <li><code>git remote add [name] [url]</code>: Add a remote repository.</li> 
+        <li><code>git remote -v</code>: List remote repositories.</li>
+        <li><code>git fetch</code>: Fetch changes from the remote repository without merging.</li>
+        <li><code>git cherry-pick [commit]</code>: Apply a specific commit from one branch to another.</li> 
+        <li><code>git rebase [branch]</code>: Reapply commits from one branch onto another.</li>
+        <li><code>git bisect start</code>: Start a bisect session to find a bug.</li>
+    </ul>
+    </div>
+
+    <h2>How Teams Use GitHub</h2>
+    <ul>
+      <li>Create a branch for each feature.</li>
+      <li>Push the branch to GitHub.</li>
+      <li>Open a Pull Request (PR).</li>
+      <li>Review each other’s code.</li>
+      <li>Merge when ready.</li>
+    </ul>
+
+    <h2>Best Practices</h2>
+    <ul>
+      <li>Commit often, in small steps.</li>
+      <li>Write clear commit messages.</li>
+      <li>Pull before you push.</li>
+      <li>Use branches instead of editing <code>main</code> directly.</li>
+      <li>Never commit passwords or secrets.</li>
+      <li>Always include a README file.</li>
+      <li>Review code through Pull Requests.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>
+      Git helps you manage your work.  
+      GitHub helps you collaborate with others.  
+      Together, they are essential for every developer.
+    </p>
+  </main>
+
+  <footer>
+    <p>🚀 Presented by Kelvin Koech | Happy Coding!</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineering</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .presentation-container {
+            width: 95%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #ffd93d;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #ff9f43;
+            border-left: 4px solid #ff6b6b;
+            padding-left: 20px;
+        }
+
+        p, li {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        ul {
+            padding-left: 30px;
+            margin-bottom: 25px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        li:before {
+            content: "→";
+            color: #ff6b6b;
+            font-weight: bold;
+            position: absolute;
+            left: -25px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #ff6b6b;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #ffd93d;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .title-slide {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ddd;
+            margin-top: 20px;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide Counter -->
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">12</span>
+        </div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <h1>Software Engineering</h1>
+            <p class="subtitle">Theme: Building the Digital World</p>
+        </div>
+
+        <!-- Slide 2: What is Software Engineering? -->
+        <div class="slide">
+            <h2>What is Software Engineering?</h2>
+            <p>Software engineering is the disciplined application of engineering principles to the design, development, maintenance, testing, and evaluation of software systems.</p>
+            <div class="highlight">
+                <p><strong>Key Definition:</strong> It's not just coding – it's the entire process of creating reliable, maintainable, and scalable software solutions that solve real-world problems.</p>
+            </div>
+
+            <h3>Why is it Important?</h3>
+            <ul>
+                <li>Ensures quality and reliability of software products</li>
+                <li>Facilitates collaboration among development teams</li>
+                <li>Helps manage complexity in large software systems</li>
+                <li>Supports continuous improvement and adaptation to changing requirements</li>
+                <li>Increases overall productivity and efficiency</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Core Principles -->
+        <div class="slide">
+            <h2>Core Principles of Software Engineering</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Modularity</h3>
+                    <p>Breaking complex systems into smaller, manageable components that can be developed and tested independently.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Abstraction</h3>
+                    <p>Hiding complex implementation details behind simple interfaces, making systems easier to understand and use.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Maintainability</h3>
+                    <p>Writing code that is easy to understand, modify, and extend over time as requirements change.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Reliability</h3>
+                    <p>Ensuring software works correctly under specified conditions and handles errors gracefully.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Scalability</h3>
+                    <p>Designing systems that can handle increased load or complexity without significant performance degradation.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Efficiency</h3>
+                    <p>Optimizing resource usage (CPU, memory, bandwidth) to ensure fast and responsive software.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Usability</h3>
+                    <p>Creating software that is intuitive and easy for users to interact with.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Security</h3>
+                    <p>Protecting software from unauthorized access and vulnerabilities.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Software Development Life Cycle -->
+        <div class="slide">
+            <h2>Software Development Life Cycle (SDLC)</h2>
+            
+            <h3>The systematic approach to building software:</h3>
+            <ul>
+                <li><strong>Planning:</strong> Define project scope, timeline, and resources</li>
+                <li><strong>Analysis:</strong> Gather and document requirements</li>
+                <li><strong>Design:</strong> Create system architecture and detailed designs</li>
+                <li><strong>Implementation:</strong> Write the actual code</li>
+                <li><strong>Testing:</strong> Verify the software works correctly</li>
+                <li><strong>Deployment:</strong> Release software to production</li>
+                <li><strong>Maintenance:</strong> Ongoing support and updates</li>
+            </ul>
+            
+            <div class="highlight">
+                <p><strong>Remember:</strong> This is often an iterative process, not a linear one!</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Development Methodologies -->
+        <div class="slide">
+            <h2>Development Methodologies</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Waterfall</h3>
+                    <p>Sequential approach where each phase must be completed before the next begins. Good for well-defined projects with stable requirements.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Agile</h3>
+                    <p>Iterative approach with short development cycles (sprints). Emphasizes collaboration, flexibility, and rapid delivery of working software.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>DevOps</h3>
+                    <p>Combines development and operations, focusing on automation, continuous integration, and rapid deployment.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Scrum</h3>
+                    <p>Specific agile framework with defined roles (Scrum Master, Product Owner), ceremonies, and artifacts.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Programming Languages & Technologies -->
+        <div class="slide">
+            <h2>Programming Languages & Technologies</h2>
+            
+            <h3>Frontend Development</h3>
+            <ul>
+                <li><strong>HTML/CSS/JavaScript:</strong> Core web technologies</li>
+                <li><strong>React, Vue, Angular:</strong> Modern frontend frameworks</li>
+                <li><strong>Mobile:</strong> Swift (iOS), Kotlin/Java (Android), React Native, Flutter</li>
+            </ul>
+            
+            <h3>Backend Development</h3>
+            <ul>
+                <li><strong>Python:</strong> Django, Flask - great for rapid development</li>
+                <li><strong>JavaScript:</strong> Node.js - full-stack JavaScript</li>
+                <li><strong>Java:</strong> Spring - enterprise applications</li>
+                <li><strong>C#:</strong> .NET - Microsoft ecosystem</li>
+                <li><strong>Go, Rust:</strong> Modern, performance-focused languages</li>
+            </ul>
+            
+            <h3>Databases</h3>
+            <ul>
+                <li><strong>SQL:</strong> PostgreSQL, MySQL, SQLite</li>
+                <li><strong>NoSQL:</strong> MongoDB, Redis, Cassandra</li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: Software Architecture -->
+        <div class="slide">
+            <h2>Software Architecture</h2>
+            
+            <p>Software architecture defines the high-level structure of software systems and the discipline of creating such structures.</p>
+            
+            <h3>Common Architectural Patterns</h3>
+            <ul>
+                <li><strong>Monolithic:</strong> Single deployable unit, simple but can become complex</li>
+                <li><strong>Microservices:</strong> Small, independent services communicating over networks</li>
+                <li><strong>Service-Oriented Architecture (SOA):</strong> Services communicate through well-defined interfaces</li>
+                <li><strong>Event-Driven:</strong> Components communicate through events and messages</li>
+                <li><strong>Layered Architecture:</strong> Organized into horizontal layers (presentation, business, data)</li>
+            </ul>
+            
+            <div class="highlight">
+                <p><strong>Key Consideration:</strong> Architecture decisions have long-term consequences and are difficult to change later.</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Testing & Quality Assurance -->
+        <div class="slide">
+            <h2>Testing & Quality Assurance</h2>
+            
+            <h3>Types of Testing</h3>
+            <ul>
+                <li><strong>Unit Testing:</strong> Testing individual components in isolation</li>
+                <li><strong>Integration Testing:</strong> Testing how components work together</li>
+                <li><strong>System Testing:</strong> Testing the complete system</li>
+                <li><strong>User Acceptance Testing:</strong> Validating with end users</li>
+                <li><strong>Performance Testing:</strong> Ensuring system meets performance requirements</li>
+                <li><strong>Security Testing:</strong> Identifying vulnerabilities</li>
+            </ul>
+            
+          
+            
+            <div class="highlight">
+                <p><strong>Best Practice:</strong> Write tests early and often. Automated testing saves time and prevents regressions.</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Version Control & Collaboration -->
+        <div class="slide">
+            <h2>Version Control & Collaboration</h2>
+            
+            <h3>Version Control Systems</h3>
+            <p>Track changes to code over time and enable collaboration among developers.</p>
+            
+            <ul>
+                <li><strong>Git:</strong> Distributed version control system (most popular)</li>
+                <li><strong>GitHub, GitLab, Bitbucket:</strong> Cloud-based Git hosting platforms</li>
+                <li><strong>Branching:</strong> Work on features in isolation</li>
+                <li><strong>Merging:</strong> Integrate changes from different branches</li>
+                <li><strong>Pull Requests:</strong> Code review process before merging</li>
+            </ul>
+            
+            <div class="code-block">
+                <strong>Common Git Commands:</strong><br>
+                git clone [repository]<br>
+                git add [files]<br>
+                git commit -m "message"<br>
+                git push origin main<br>
+                git pull origin main
+            </div>
+        </div>
+
+        <!-- Slide 10: Software Engineering Roles -->
+        <div class="slide">
+            <h2>Software Engineering Roles</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Software Developer</h3>
+                    <p>Writes code, implements features, fixes bugs. Can specialize in frontend, backend, or full-stack development.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Software Architect</h3>
+                    <p>Designs high-level system structure, makes technology decisions, guides technical direction.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>DevOps Engineer</h3>
+                    <p>Manages deployment pipelines, infrastructure, and automation tools to support development teams.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>QA Engineer</h3>
+                    <p>Designs and executes tests, ensures quality standards, identifies defects before release.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Project Manager</h3>
+                    <p>Coordinates development efforts, manages timelines, facilitates communication between teams.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Product Manager</h3>
+                    <p>Defines product requirements, prioritizes features, bridges business and technical teams.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Current Trends -->
+        <div class="slide">
+            <h2>Current Trends in Software Engineering</h2>
+            
+            <h3>Emerging Technologies</h3>
+            <ul>
+                <li><strong>Artificial Intelligence & Machine Learning:</strong> Integrating AI capabilities into applications</li>
+                <li><strong>Cloud Computing:</strong> AWS, Azure, Google Cloud for scalable infrastructure</li>
+                <li><strong>Containerization:</strong> Docker, Kubernetes for consistent deployment environments</li>
+                <li><strong>Serverless Computing:</strong> Function-as-a-Service for event-driven applications</li>
+            </ul>
+            
+            <h3>Development Practices</h3>
+            <ul>
+                <li><strong>Continuous Integration/Continuous Deployment (CI/CD):</strong> Automated testing and deployment</li>
+                <li><strong>Infrastructure as Code:</strong> Managing infrastructure through version-controlled code</li>
+                <li><strong>Low-Code/No-Code:</strong> Platforms enabling non-programmers to build applications</li>
+                <li><strong>Remote-First Development:</strong> Tools and practices for distributed teams</li>
+            </ul>
+        </div>
+
+        <!-- Slide 12: Getting Started -->
+        <div class="slide">
+            <h2>Getting Started in Software Engineering</h2>
+            
+            <h3>Essential Skills to Develop</h3>
+            <ul>
+                <li><strong>Programming Fundamentals:</strong> Start with one language, master the basics</li>
+                <li><strong>Problem-Solving:</strong> Break down complex problems into smaller parts</li>
+                <li><strong>Data Structures & Algorithms:</strong> Foundation for efficient programming</li>
+                <li><strong>Version Control:</strong> Learn Git early in your journey</li>
+                <li><strong>Database Basics:</strong> Understand how to store and retrieve data</li>
+            </ul>
+            
+            <h3>Recommended Learning Path</h3>
+            <ul>
+                <li>Choose a programming language (Python, JavaScript, or Java are good starting points)</li>
+                <li>Build small projects to practice concepts</li>
+                <li>Learn version control with Git and GitHub</li>
+                <li>Understand databases and basic web technologies</li>
+                <li>Study software engineering principles and best practices</li>
+                <li>Contribute to open-source projects</li>
+                <li>Build a portfolio of projects to showcase your skills</li>
+            </ul>
+            
+            <div class="highlight">
+                <p><strong>Remember:</strong> Software engineering is a journey of continuous learning. Technology evolves rapidly, so staying curious and adaptable is key to success!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" id="next-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = n + 1;
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = n === 0;
+            document.getElementById('next-btn').disabled = n === totalSlides - 1;
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+        
+        function previousSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+        
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
